@@ -8,12 +8,16 @@ export default function MainPage(props) {
 
     return(
     
-    <div key={data.id}>
-     < img src={data.links?.patch?.small?data.links?.patch?.small:"./placeholder.jpeg"}/>
-        <p>{data.name}</p>
-        <p>{date}</p>
-        <p>{data.success?"Mision was successfull":"Mision Failed"}</p>
-        <p>{data.flight_number}</p>
+    <div className="mainPage" key={data.id}>
+        <button className="btnMain">
+     < img style={{ marginRight: '60px',marginLeft:'15px' }} className="imgMain" src={data.links?.patch?.small?data.links?.patch?.small:"./placeholder.jpeg"}/>
+        <p style={{ marginRight: '60px' }}>{data.name}</p>
+        <p style={{ marginRight: '60px' }}>{date.split('-').reverse().join('-')}</p>
+        <p className={data.success?'success' :'failed'} style={{ marginRight: '60px' }}>{data.success?"Mision Successfull":"Mission Failed"}</p>
+        <p style={{ marginRight: '60px' }}> Flight number :  {data.flight_number}</p>
+          </button>
+        <button>Star</button>
+      
     </div>)
 
 
@@ -21,6 +25,15 @@ export default function MainPage(props) {
    })
     return (
         <div>
+             <h2 className="headerMain" >All launches</h2>
+            <div className="topPage">
+           
+           <p  style= {{ marginRight: '80px',marginLeft:'15px' }}>Badge</p>
+           <p style= {{ marginRight: '100px' }}>Name</p>
+           <p style= {{ marginRight: '120px' }}>Date</p>
+           <p style ={{ marginRight: '100px' }}>Status</p>
+           <p style ={{ marginRight: '15px' }}>Flight number</p>
+           </div>
 {page}
         </div>
     )
