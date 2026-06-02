@@ -1,6 +1,8 @@
+import "./App.css";
 import React from "react";
 import { fetchData } from "./Components/Data";
 import MainPage from "./Components/MainPage";
+import LoadingPage from "./Components/LoadingPage";
 
 function App() {
 const [data,setData] = React.useState(null)
@@ -21,7 +23,7 @@ getData()
 
   return (
     <div>
-    
+    <LoadingPage/>
 <MainPage
 data={data}
 />
