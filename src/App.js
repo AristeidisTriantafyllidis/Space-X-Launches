@@ -23,7 +23,7 @@ getData()
 
   return (
     <div>
-    <LoadingPage/>
+ 
 <MainPage
 data={data}
 />
