@@ -6,12 +6,13 @@ export default function DetailPage(props){
     
     const [date,hour] =props.data?.date_local?.replace("Z", "").split("T")
 return(
-    <div className="detailPage">
-        <button>Go back</button>
-     < img  alt="Rocket"className="imgMain" src={props.data.links?.patch?.small?props.data.links?.patch?.small:"./placeholder.jpeg"}/>
+    <div className="detailPage" >
+        
+        <button style={{marginTop : '15px'}}>Go back</button>
+     < img  alt="Rocket"className="imgDetail" src={props.data.links?.patch?.small?props.data.links?.patch?.small:"./placeholder.jpeg"}/>
         <p>Rocket name: {props.rocketDetails.name}</p>
-        <p>{props.data.name}</p>
-        <p >{date.split('-').reverse().join('-')}</p>
+        <p>Mision name : {props.data.name}</p>
+        <p >Date :{date.split('-').reverse().join('-')}</p>
         <p className={props.data.success?'success' :'failed'} style={{ marginRight: '60px' }}>{props.data.success?"Mision Successfull":"Mission Failed"}</p>
         <p> Flight number :  {props.data.flight_number}</p>
         <p>{props.data.details}</p>

@@ -10,7 +10,7 @@ export default function MainPage(props) {
 
     return(
     
-    <div className="mainPage" key={data.id}>
+    <div className="displayInfo" key={data.id}>
         <button className="btnMain" onClick={()=>props.findIds(data.id,data.rocket)} >
      < img style={{ marginRight: '60px',marginLeft:'15px' }} className="imgMain" src={data.links?.patch?.small?data.links?.patch?.small:"./placeholder.jpeg"}/>
         <p style={{ marginRight: '60px' }}>{data.name}</p>
@@ -26,7 +26,7 @@ export default function MainPage(props) {
    
    })
     return (
-        <div>
+        <div className="mainPage">
              <h2 className="headerMain" >All launches</h2>
             <div className="topPage">
            

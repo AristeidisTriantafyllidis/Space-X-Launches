@@ -47,7 +47,7 @@ async function getRocketData(){
 }
 getSpecificData()
 getRocketData()
-  }},[id])
+  }},[id,rocketId])
  
   function findIds(id,rocketId) {
     setId(id)

@@ -1,5 +1,7 @@
 .mainPage{
     display: flex;
+     flex-direction: column;
+     align-items: center;
     }
 .loadingPhoto {
     width: 100%;
@@ -42,4 +44,11 @@
 }
 .detailPage{
     color:aliceblue ;
+}
+
+.imgDetail{
+    display: flex;
+}
+.displayInfo{
+    display: flex;
 }
