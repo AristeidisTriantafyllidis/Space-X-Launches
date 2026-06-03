@@ -1,15 +1,17 @@
 import React from "react";
 
 export default function MainPage(props) {
-
-    console.log(props.data)
+  
+  
+    
+   
    const page = props.data?.map((data)=>{
     const [date,hour] =data?.date_local?.replace("Z", "").split("T")
 
     return(
     
     <div className="mainPage" key={data.id}>
-        <button className="btnMain">
+        <button className="btnMain" onClick={()=>props.findIds(data.id,data.rocket)} >
      < img style={{ marginRight: '60px',marginLeft:'15px' }} className="imgMain" src={data.links?.patch?.small?data.links?.patch?.small:"./placeholder.jpeg"}/>
         <p style={{ marginRight: '60px' }}>{data.name}</p>
         <p style={{ marginRight: '60px' }}>{date.split('-').reverse().join('-')}</p>
