@@ -24,13 +24,8 @@
     color: aliceblue;
 }
 
-.success {
-    color: green;
-}
 
-.failed {
-    color: red;
-}
+
 .btnMain{
      border: 2px solid white;
     display: flex;

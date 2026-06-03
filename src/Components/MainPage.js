@@ -7,7 +7,11 @@ export default function MainPage(props) {
    
    const page = props.data?.map((data)=>{
     const [date,hour] =data?.date_local?.replace("Z", "").split("T")
-
+    let text = "";
+    let styletext ={};
+if (data.upcoming){text =" is Upcoming"; styletext = {color:'grey',marginRight:'60px'}; }
+else if(data.success){text=" was succesfull"; styletext={color:'green',marginRight:'60px'};}
+else if(!data.success){text= "Failed"; styletext={color:'red',marginRight:'60px'}}
     return(
     
     <div className="displayInfo" key={data.id}>
@@ -15,7 +19,7 @@ export default function MainPage(props) {
      < img style={{ marginRight: '60px',marginLeft:'15px' }} className="imgMain" src={data.links?.patch?.small?data.links?.patch?.small:"./placeholder.jpeg"}/>
         <p style={{ marginRight: '60px' }}>{data.name}</p>
         <p style={{ marginRight: '60px' }}>{date.split('-').reverse().join('-')}</p>
-        <p className={data.success?'success' :'failed'} style={{ marginRight: '60px' }}>{data.success?"Mision Successfull":"Mission Failed"}</p>
+        <p className="mission" style={styletext}> Mission{text}</p>
         <p style={{ marginRight: '60px' }}> Flight number :  {data.flight_number}</p>
           </button>
         <button>Star</button>

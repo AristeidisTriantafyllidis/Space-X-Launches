@@ -54,7 +54,7 @@ getRocketData()
     seRocketId(rocketId)
   
   }
-
+console.log(launches)
   return (
     <div>
 
