@@ -4,6 +4,7 @@ import { fetchData,fetchSpecificData,fetchRocketDetails } from "./Components/ser
 import MainPage from "./Components/MainPage";
 import LoadingPage from "./Components/LoadingPage";
 import DetailPage from "./Components/DetailPage.js";
+import {BrowserRouter,Link,Route,Routes} from "react-router-dom"
 
 function App() {
 
@@ -54,17 +55,34 @@ getRocketData()
     seRocketId(rocketId)
   
   }
-console.log(launches)
+let homePage ;
+if(launches === null){
+  homePage = <LoadingPage/>
+}
+else{
+  homePage=<MainPage
+  data={launches}
+  findIds={findIds}
+  />
+}
+let detailPage ;
+if(specificLaunch && rocketDetails === null){
+detailPage = <LoadingPage/>
+}
+else{
+  detailPage = <DetailPage
+  data={specificLaunch}
+  rocketDetails={rocketDetails}/>
+}
+
   return (
     <div>
-
-      {/* <MainPage
-        data={launches}
-        findIds={findIds}
-      /> */}
-   <DetailPage
-   data={specificLaunch}
-   rocketDetails={rocketDetails}/>
+<BrowserRouter>
+<Routes>
+  <Route path ='/' element ={homePage}/>
+  <Route path ='/DetailPage' element = {detailPage}/>
+   </Routes>
+   </BrowserRouter>
     </div>
   );
 }
