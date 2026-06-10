@@ -27,8 +27,7 @@
 
 
 .btnMain{
-     border: 2px solid white;
-    display: flex;
+     display: flex;
     margin-top: 20px;
     background-color:black;
     color: aliceblue;
