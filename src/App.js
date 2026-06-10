@@ -17,84 +17,84 @@ function App() {
   const [error, setError] = React.useState(null)
 
   const mockLaunches = [{
-  "id": "5eb87d46ffd86e000604b3880",
-  "name": "FalconSat",
-  "date_local": "2006-03-24T22:30:00.000Z",
-  "success": true,
-  "details": "Engine failure at 33 seconds and loss of vehicle",
-  "rocket": "5e9d0d95eda69955f709bf1c",
-  "links": {
-    "patch": {
-      "small": "https://images2.imgbox.com/3c/0e/T8iJcSN3_o.png"
+    "id": "5eb87d46ffd86e000604b3880",
+    "name": "FalconSat",
+    "date_local": "2006-03-24T22:30:00.000Z",
+    "success": true,
+    "details": "Engine failure at 33 seconds and loss of vehicle",
+    "rocket": "5e9d0d95eda69955f709bf1c",
+    "links": {
+      "patch": {
+        "small": "https://images2.imgbox.com/3c/0e/T8iJcSN3_o.png"
+      },
+      "webcast": "https://www.youtube.com/watch?v=0a_00nJ_Y88",
+      "wikipedia": "https://en.wikipedia.org/wiki/DemoSat",
+      "article": "https://www.space.com/2196-spacex-inaugural-falcon-1-702"
     },
-    "webcast": "https://www.youtube.com/watch?v=0a_00nJ_Y88",
-    "wikipedia": "https://en.wikipedia.org/wiki/DemoSat",
-    "article": "https://www.space.com/2196-spacex-inaugural-falcon-1-702"
-  },
-  "crew": [],
-  "payloads": ["5eb0e4b5b6c3bb0006eeb1e1"],
-  "launchpad": "5e9e4502f5090995de566f86",
-  "flight_number": 1,
-  "upcoming": false
-},{
-  "id": "5eb87d46ffd86e000604b3882",
-  "name": "aris",
-  "date_local": "2006-03-24T22:30:00.000Z",
-  "success": false,
-  "details": "Engine failure at 33 seconds and loss of vehicle",
-  "rocket": "5e9d0d95eda69955f709bf1c",
-  "links": {
-    "patch": {
-      "small": "https://images2.imgbox.com/3c/0e/T8iJcSN3_o.png"
+    "crew": [],
+    "payloads": ["5eb0e4b5b6c3bb0006eeb1e1"],
+    "launchpad": "5e9e4502f5090995de566f86",
+    "flight_number": 1,
+    "upcoming": false
+  }, {
+    "id": "5eb87d46ffd86e000604b3882",
+    "name": "aris",
+    "date_local": "2006-03-24T22:30:00.000Z",
+    "success": false,
+    "details": "Engine failure at 33 seconds and loss of vehicle",
+    "rocket": "5e9d0d95eda69955f709bf1c",
+    "links": {
+      "patch": {
+        "small": "https://images2.imgbox.com/3c/0e/T8iJcSN3_o.png"
+      },
+      "webcast": "https://www.youtube.com/watch?v=0a_00nJ_Y88",
+      "wikipedia": "https://en.wikipedia.org/wiki/DemoSat",
+      "article": "https://www.space.com/2196-spacex-inaugural-falcon-1-702"
     },
-    "webcast": "https://www.youtube.com/watch?v=0a_00nJ_Y88",
-    "wikipedia": "https://en.wikipedia.org/wiki/DemoSat",
-    "article": "https://www.space.com/2196-spacex-inaugural-falcon-1-702"
-  },
-  "crew": [],
-  "payloads": ["5eb0e4b5b6c3bb0006eeb1e1"],
-  "launchpad": "5e9e4502f5090995de566f86",
-  "flight_number": 2,
-  "upcoming": false
-},{
-  "id": "5eb87d46ffd86e000604b3883",
-  "name": "alex",
-  "date_local": "2006-03-24T22:30:00.000Z",
-  "success": false,
-  "details": "Engine failure at 33 seconds and loss of vehicle",
-  "rocket": "5e9d0d95eda69955f709bf1c",
-  "links": {
-    "patch": {
-      "small": "https://images2.imgbox.com/3c/0e/T8iJcSN3_o.png"
+    "crew": [],
+    "payloads": ["5eb0e4b5b6c3bb0006eeb1e1"],
+    "launchpad": "5e9e4502f5090995de566f86",
+    "flight_number": 2,
+    "upcoming": false
+  }, {
+    "id": "5eb87d46ffd86e000604b3883",
+    "name": "alex",
+    "date_local": "2006-03-24T22:30:00.000Z",
+    "success": false,
+    "details": "Engine failure at 33 seconds and loss of vehicle",
+    "rocket": "5e9d0d95eda69955f709bf1c",
+    "links": {
+      "patch": {
+        "small": "https://images2.imgbox.com/3c/0e/T8iJcSN3_o.png"
+      },
+      "webcast": "https://www.youtube.com/watch?v=0a_00nJ_Y88",
+      "wikipedia": "https://en.wikipedia.org/wiki/DemoSat",
+      "article": "https://www.space.com/2196-spacex-inaugural-falcon-1-702"
     },
-    "webcast": "https://www.youtube.com/watch?v=0a_00nJ_Y88",
-    "wikipedia": "https://en.wikipedia.org/wiki/DemoSat",
-    "article": "https://www.space.com/2196-spacex-inaugural-falcon-1-702"
-  },
-  "crew": [],
-  "payloads": ["5eb0e4b5b6c3bb0006eeb1e1"],
-  "launchpad": "5e9e4502f5090995de566f86",
-  "flight_number": 3,
-  "upcoming": false
-}];
+    "crew": [],
+    "payloads": ["5eb0e4b5b6c3bb0006eeb1e1"],
+    "launchpad": "5e9e4502f5090995de566f86",
+    "flight_number": 3,
+    "upcoming": false
+  }];
 
-const mockSpecificLaunch = {
-  "id": "5eb87d46ffd86e000604b3880",
-  "name": "FalconSat",
-  "date_local": "2006-03-24T22:30:00.000Z",
-  "success": true,
-  "details": "Engine failure at 33 seconds and loss of vehicle.",
-  "rocket": "5e9d0d95eda69955f709bf1c",
-  "links": {
-    "patch": { "small": "https://images2.imgbox.com/3c/0e/T8iJcSN3_o.png" },
-    "webcast": "https://www.youtube.com/watch?v=0a_00nJ_Y88",
-    "wikipedia": "https://en.wikipedia.org/wiki/DemoSat",
-    "article": "https://www.space.com/2196-spacex-inaugural-falcon-1-702"
-  },
-  "flight_number": 1,
-  "upcoming": false
-};
-const mockRocketDetail={"name":"pyravlos"};
+  const mockSpecificLaunch = {
+    "id": "5eb87d46ffd86e000604b3880",
+    "name": "FalconSat",
+    "date_local": "2006-03-24T22:30:00.000Z",
+    "success": true,
+    "details": "Engine failure at 33 seconds and loss of vehicle.",
+    "rocket": "5e9d0d95eda69955f709bf1c",
+    "links": {
+      "patch": { "small": "https://images2.imgbox.com/3c/0e/T8iJcSN3_o.png" },
+      "webcast": "https://www.youtube.com/watch?v=0a_00nJ_Y88",
+      "wikipedia": "https://en.wikipedia.org/wiki/DemoSat",
+      "article": "https://www.space.com/2196-spacex-inaugural-falcon-1-702"
+    },
+    "flight_number": 1,
+    "upcoming": false
+  };
+  const mockRocketDetail = { "name": "pyravlos" };
 
   React.useEffect(() => {
     async function getData() {
@@ -105,20 +105,21 @@ const mockRocketDetail={"name":"pyravlos"};
       catch (error) {
         // setError(1)
         setLaunches(mockLaunches)
-       }
+      }
     }
     getData()
   }, [])
 
   React.useEffect(() => {
     if (id !== null) {
+    
       async function getSpecificData() {
         try {
           const result = await fetchSpecificData(id)
           setSpecificLaunch(result)
         }
         catch (error) {
-           setSpecificLaunch(mockSpecificLaunch)
+          setSpecificLaunch(mockSpecificLaunch)
           // setError(1)
         }
       }
@@ -129,16 +130,25 @@ const mockRocketDetail={"name":"pyravlos"};
         }
         catch (error) {
           // setError(1)
-         setRocketDetails(mockRocketDetail)
-       
+          setRocketDetails(mockRocketDetail)
+
         }
       }
       getSpecificData()
       getRocketData()
+
+    }
+    return function () {
+      setSpecificLaunch(null)
+      setRocketDetails(null)
+      setId(null)
+      setRocketId(null)
+
+      
     }
   }, [id, rocketId])
 
-  function findIds(id, rocketId) {
+ const findIds = (id, rocketId)=> {
     setId(id)
     setRocketId(rocketId)
   }
@@ -158,11 +168,11 @@ const mockRocketDetail={"name":"pyravlos"};
       findIds={findIds}
     />
   }
-  
+
   if (error !== null) {
     detailPage = <FailPage />
   }
-  else if (specificLaunch && rocketDetails === null) {
+  else if (specificLaunch === null || rocketDetails === null) {
     detailPage = <LoadingPage />
   }
   else {
