@@ -3,12 +3,24 @@ import { useNavigate } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 
 export default function MainPage(props) {
-  const [launchesStar, setLaunchesStar] = React.useState([]);
-  const [filter, setFilter] = React.useState("All");
-  const [order, setOrder] = React.useState(null);
-  const [filterName, setFilterName] = React.useState("");
+  const [launchesStar, setLaunchesStar] = React.useState(() => {
+    const savedIds = localStorage.getItem("id");
+    return savedIds ? JSON.parse(savedIds) : [];
+  });
+  const [diplayLaunches, setDisplayLaunches] = React.useState([]);
+  const [filterStyle, setFilterStyle] = React.useState(false);
 
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (props.data) {
+      setDisplayLaunches(props.data);
+    }
+  }, [props.data]);
+
+  React.useEffect(() => {
+    localStorage.setItem("id", JSON.stringify(launchesStar));
+  }, [launchesStar]);
 
   const handleClick = (data) => {
     props.findIds(data.id, data.rocket);
@@ -17,7 +29,7 @@ export default function MainPage(props) {
 
   const starHandle = (id) => {
     if (launchesStar.includes(id)) {
-      setLaunchesStar(launchesStar.filter((element) => element !== id));
+      setLaunchesStar(launchesStar.filter((existingIds) => existingIds !== id));
     } else {
       setLaunchesStar([...launchesStar, id]);
     }
@@ -30,109 +42,118 @@ export default function MainPage(props) {
       return false;
     }
   };
-
-  let filterLaunches = props.data?.filter((launch) => {
-    if (filter === "All") {
-      return true;
-    } else if (filter === "Failed" && !launch.success) {
-      return true;
-    } else if (filter === "Success" && launch.success) {
-      return true;
-    }
-  });
-
-  if (filterName.length > 0) {
-    filterLaunches = filterLaunches.filter((launch) => {
-      if (filterName.length <= launch.name.length) {
-        for (let i = 0; i < filterName.length; i++) {
-          if (filterName[i].toUpperCase() !== launch.name[i].toUpperCase()) {
+  const filterLaunces = (filter) => {
+    const filteredLaunches = props.data.filter((launch) => {
+      if (filter === "All") {
+        return true;
+      } else if (filter === "Failed" && !launch.success) {
+        return true;
+      } else if (filter === "Success" && launch.success) {
+        return true;
+      }
+      return false;
+    });
+    setDisplayLaunches(filteredLaunches);
+  };
+  const filterByName = (value) => {
+    const filteredLaunch = props.data.filter((launch) => {
+      if (value.length <= launch.name.length) {
+        for (let i = 0; i < value.length; i++) {
+          if (value[i].toUpperCase() !== launch.name[i].toUpperCase()) {
             return false;
           }
         }
         return true;
       }
     });
-  }
 
-  const sortedLaunches = [...filterLaunches];
-
-  if (order === "asc") {
-    sortedLaunches.sort(
-      (a, b) => new Date(a.date_local) - new Date(b.date_local),
-    );
-  } else if (order === "desc") {
-    sortedLaunches.sort(
-      (a, b) => new Date(b.date_local) - new Date(a.date_local),
-    );
-  }
-
-  const page = sortedLaunches.map((launch) => {
-    const [date, hour] = launch?.date_local?.replace("Z", "").split("T");
-    let text = "";
-    let styletext = {};
-    if (launch.upcoming) {
-      text = " is Upcoming";
-      styletext = { color: "grey", marginRight: "60px" };
-    } else if (launch.success) {
-      text = " was succesfull";
-      styletext = { color: "green", marginRight: "60px" };
-    } else if (!launch.success) {
-      text = " Failed";
-      styletext = { color: "red", marginRight: "60px" };
-    }
-
-    let favStyle = {};
-    if (isFavourite(launch.id)) {
-      favStyle = { border: "6px solid gold" };
-    } else {
-      favStyle = { border: "2px solid white" };
-    }
-
-    return (
-      <div className="displayInfo" key={launch.id}>
-        <button
-          style={favStyle}
-          className="btnMain"
-          onClick={() => {
-            handleClick(launch);
-          }}
-        >
-          <img
-            alt="the badge of mission"
-            style={{ marginRight: "60px", marginLeft: "15px" }}
-            className="imgMain"
-            src={
-              launch.links?.patch?.small
-                ? launch.links?.patch?.small
-                : "./placeholder.jpeg"
-            }
-          />
-          <p style={{ marginRight: "60px" }}>{launch.name}</p>
-          <p style={{ marginRight: "60px" }}>
-            {date.split("-").reverse().join("-")}
-          </p>
-          <p className="mission" style={styletext}>
-            {" "}
-            Mission{text}
-          </p>
-          <p style={{ marginRight: "60px" }}>
-            {" "}
-            Flight number : {launch.flight_number}
-          </p>
-        </button>
-        <button
-          aria-label="Button that adds a launch in Favorite"
-          className="starbtn"
-          onClick={() => starHandle(launch.id)}
-        >
-          <img src="star.png" alt="Star" />
-        </button>
-      </div>
-    );
-  });
-  const filterByName = (value) => {
-    setFilterName(value);
+    setDisplayLaunches(filteredLaunch);
   };
+
+  const sortLaunches = (order) => {
+    const sortedLaunches = [...diplayLaunches];
+    if (order === "asc") {
+      sortedLaunches.sort(
+        (a, b) => new Date(a.date_local) - new Date(b.date_local),
+      );
+    } else if (order === "desc") {
+      sortedLaunches.sort(
+        (a, b) => new Date(b.date_local) - new Date(a.date_local),
+      );
+    }
+    setDisplayLaunches(sortedLaunches);
+  };
+
+  let page;
+  if (diplayLaunches.length === 0) {
+    page = <h1>No launches found</h1>;
+  } else {
+    page = diplayLaunches.map((launch) => {
+      const [date, hour] = launch?.date_local?.replace("Z", "").split("T");
+      let text = "";
+      let styletext = {};
+      if (launch.upcoming) {
+        text = " is Upcoming";
+        styletext = { color: "grey", marginRight: "60px" };
+      } else if (launch.success) {
+        text = " was succesfull";
+        styletext = { color: "green", marginRight: "60px" };
+      } else if (!launch.success) {
+        text = " Failed";
+        styletext = { color: "red", marginRight: "60px" };
+      }
+
+      let favStyle = {};
+      if (isFavourite(launch.id)) {
+        favStyle = { border: "6px solid gold" };
+      } else {
+        favStyle = { border: "2px solid white" };
+      }
+
+      return (
+        <div className="displayInfo" key={launch.id}>
+          <button
+            style={favStyle}
+            className="btnMain"
+            onClick={() => {
+              handleClick(launch);
+            }}
+          >
+            <img
+              alt="the badge of mission"
+              style={{ marginRight: "60px", marginLeft: "15px" }}
+              className="imgMain"
+              src={
+                launch.links?.patch?.small
+                  ? launch.links?.patch?.small
+                  : "./placeholder.jpeg"
+              }
+            />
+            <p style={{ marginRight: "60px" }}>{launch.name}</p>
+            <p style={{ marginRight: "60px" }}>
+              {date.split("-").reverse().join("-")}
+            </p>
+            <p className="mission" style={styletext}>
+              {" "}
+              Mission{text}
+            </p>
+            <p style={{ marginRight: "60px" }}>
+              {" "}
+              Flight number : {launch.flight_number}
+            </p>
+          </button>
+          <button
+            aria-label="Button that adds a launch in Favorite"
+            className="starbtn"
+            onClick={() => starHandle(launch.id)}
+          >
+            <img src="star.png" alt="Star" />
+          </button>
+        </div>
+      );
+    });
+  }
+
   return (
     <div>
       <div className="DropDownForStatus">
@@ -148,25 +169,25 @@ export default function MainPage(props) {
           <Dropdown.Menu>
             <Dropdown.Item
               style={{ marginRight: "10px", color: "white" }}
-              onClick={() => setFilter("Success")}
+              onClick={() => filterLaunces("Success")}
             >
               Succesfull
             </Dropdown.Item>
             <Dropdown.Item
               style={{ marginRight: "10px", color: "white" }}
-              onClick={() => setFilter("Failed")}
+              onClick={() => filterLaunces("Failed")}
             >
               Failed
             </Dropdown.Item>
             <Dropdown.Item
               style={{ marginRight: "10px", color: "white" }}
-              onClick={() => setFilter("UpComing")}
+              onClick={() => filterLaunces("UpComing")}
             >
               Upcoming
             </Dropdown.Item>
             <Dropdown.Item
               style={{ marginRight: "10px", color: "white" }}
-              onClick={() => setFilter("All")}
+              onClick={() => filterLaunces("All")}
             >
               No filter
             </Dropdown.Item>
@@ -182,19 +203,19 @@ export default function MainPage(props) {
           <Dropdown.Menu>
             <Dropdown.Item
               style={{ marginRight: "10px", color: "white" }}
-              onClick={() => setOrder("asc")}
+              onClick={() => sortLaunches("asc")}
             >
               Ascending
             </Dropdown.Item>
             <Dropdown.Item
               style={{ marginRight: "10px", color: "white" }}
-              onClick={() => setOrder("desc")}
+              onClick={() => sortLaunches("desc")}
             >
               Descending
             </Dropdown.Item>
             <Dropdown.Item
               style={{ marginRight: "10px", color: "white" }}
-              onClick={() => setOrder(null)}
+              onClick={() => sortLaunches(null)}
             >
               No Sort
             </Dropdown.Item>
