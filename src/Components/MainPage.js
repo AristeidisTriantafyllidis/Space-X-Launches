@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Dropdown from "react-bootstrap/Dropdown";
 
 export default function MainPage(props) {
