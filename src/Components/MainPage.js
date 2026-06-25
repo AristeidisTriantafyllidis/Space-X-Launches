@@ -8,8 +8,8 @@ export default function MainPage(props) {
     return savedIds ? JSON.parse(savedIds) : [];
   });
   const [diplayLaunches, setDisplayLaunches] = React.useState([]);
-  const [filterStyle, setFilterStyle] = React.useState(false);
-
+  const [styleStatusFilter, setStyleStatusFilter] = React.useState("All");
+  const [styleSortFilter, setStyleSortFilter] = React.useState("No sort");
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -42,7 +42,9 @@ export default function MainPage(props) {
       return false;
     }
   };
+
   const filterLaunces = (filter) => {
+    setStyleStatusFilter(filter);
     const filteredLaunches = props.data.filter((launch) => {
       if (filter === "All") {
         return true;
@@ -71,6 +73,7 @@ export default function MainPage(props) {
   };
 
   const sortLaunches = (order) => {
+    setStyleSortFilter(order);
     const sortedLaunches = [...diplayLaunches];
     if (order === "asc") {
       sortedLaunches.sort(
@@ -157,9 +160,9 @@ export default function MainPage(props) {
   return (
     <div>
       <div className="DropDownForStatus">
-        <Dropdown>
+        <Dropdown data-bs-theme="dark">
           <Dropdown.Toggle
-            variant="success"
+            variant="secondary"
             id="dropdown-basic"
             style={{ marginTop: "30px" }}
           >
@@ -168,26 +171,42 @@ export default function MainPage(props) {
 
           <Dropdown.Menu>
             <Dropdown.Item
-              style={{ marginRight: "10px", color: "white" }}
               onClick={() => filterLaunces("Success")}
+              style={
+                styleStatusFilter === "Success"
+                  ? { marginRight: "10px", color: "red" }
+                  : { marginRight: "10px" }
+              }
             >
               Succesfull
             </Dropdown.Item>
             <Dropdown.Item
-              style={{ marginRight: "10px", color: "white" }}
               onClick={() => filterLaunces("Failed")}
+              style={
+                styleStatusFilter === "Failed"
+                  ? { marginRight: "10px", color: "red" }
+                  : { marginRight: "10px" }
+              }
             >
               Failed
             </Dropdown.Item>
             <Dropdown.Item
-              style={{ marginRight: "10px", color: "white" }}
               onClick={() => filterLaunces("UpComing")}
+              style={
+                styleStatusFilter === "UpComing"
+                  ? { marginRight: "10px", color: "red" }
+                  : { marginRight: "10px" }
+              }
             >
               Upcoming
             </Dropdown.Item>
             <Dropdown.Item
-              style={{ marginRight: "10px", color: "white" }}
               onClick={() => filterLaunces("All")}
+              style={
+                styleStatusFilter === "All"
+                  ? { marginRight: "10px", color: "red" }
+                  : { marginRight: "10px" }
+              }
             >
               No filter
             </Dropdown.Item>
@@ -195,26 +214,38 @@ export default function MainPage(props) {
         </Dropdown>
       </div>
       <div className="DropDownForSorting">
-        <Dropdown style={{ marginTop: "30px", color: "white" }}>
+        <Dropdown data-bs-theme="dark" style={{ marginTop: "30px" }}>
           <Dropdown.Toggle variant="success" id="dropdown-basic">
             Sort By Year
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
             <Dropdown.Item
-              style={{ marginRight: "10px", color: "white" }}
+              style={
+                styleSortFilter === "asc"
+                  ? { marginRight: "10px", color: "red" }
+                  : { marginRight: "10px" }
+              }
               onClick={() => sortLaunches("asc")}
             >
               Ascending
             </Dropdown.Item>
             <Dropdown.Item
-              style={{ marginRight: "10px", color: "white" }}
+              style={
+                styleSortFilter === "desc"
+                  ? { marginRight: "10px", color: "red" }
+                  : { marginRight: "10px" }
+              }
               onClick={() => sortLaunches("desc")}
             >
               Descending
             </Dropdown.Item>
             <Dropdown.Item
-              style={{ marginRight: "10px", color: "white" }}
+              style={
+                styleSortFilter === "null"
+                  ? { marginRight: "10px", color: "red" }
+                  : { marginRight: "10px" }
+              }
               onClick={() => sortLaunches(null)}
             >
               No Sort

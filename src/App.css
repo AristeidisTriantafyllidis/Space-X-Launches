@@ -1,57 +1,58 @@
-.mainPage{
-    display: flex;
-     flex-direction: column;
-     align-items: center;
-    }
+.mainPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .loadingPhoto {
-    width: 100%;
-    height: 100%;
-
+  width: 100%;
+  height: 100%;
 }
 
 .imgMain {
-    width: 50px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  width: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .headerMain {
-    color: aliceblue;
+  color: aliceblue;
 }
 
 .topPage {
-    display: flex;
-    color: aliceblue;
+  display: flex;
+  color: aliceblue;
 }
 
-
-
-.btnMain{
-     display: flex;
-    margin-top: 20px;
-    background-color:black;
-    color: aliceblue;
-    margin-right: 3px;
-    margin-left: 3px;
-    max-width: 100%;
-    cursor: pointer;
+.btnMain {
+  display: flex;
+  margin-top: 20px;
+  background-color: black;
+  color: aliceblue;
+  margin-right: 3px;
+  margin-left: 3px;
+  max-width: 100%;
+  cursor: pointer;
 }
-.detailPage{
-    color:aliceblue ;
+.detailPage {
+  color: aliceblue;
 }
 
-.imgDetail{
-    display: flex;
+.imgDetail {
+  display: flex;
 }
-.displayInfo{
-    display: flex;
+.displayInfo {
+  display: flex;
 }
 
-.failPage{
-    background-color: black;
-    color: white;
+.failPage {
+  background-color: black;
+  color: white;
 }
-.starbtn{
-    height: 50px;
-    margin-top: 30px;
+.starbtn {
+  height: 50px;
+  margin-top: 30px;
+}
+
+.Dropdown.item {
+  margin-right: 10px;
 }
