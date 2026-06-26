@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 export default function DetailPage(props) {
   const navigate = useNavigate();
 
-  const [date, hour] = props.data?.date_local?.replace("Z", "").split("T") || [" "," ",];
+  const [date, hour] = props.data?.date_local?.replace("Z", "").split("T") || [
+    " ",
+    " ",
+  ];
   let text = "";
   let styletext = {};
 
