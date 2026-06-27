@@ -21,7 +21,7 @@ function App() {
   const [rocketId, setRocketId] = React.useState(null);
   const [specificLaunch, setSpecificLaunch] = React.useState(null);
   const [rocketDetails, setRocketDetails] = React.useState(null);
-  // eslint-disable-next-liner
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
