@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function DetailPage(props) {
   const navigate = useNavigate();
 
-  const [date, hour] = props.data?.date_local?.replace("Z", "").split("T") || [
+  const date = props.data?.date_local?.replace("Z", "").split("T") || [
     " ",
     " ",
   ];
@@ -42,7 +42,7 @@ export default function DetailPage(props) {
       />
       <p>Rocket name: {props.rocketDetails?.name}</p>
       <p>Mision name : {props.data?.name}</p>
-      <p>Date :{date.split("-").reverse().join("-")}</p>
+      <p>Date :{date[0].split("-").reverse().join("-")}</p>
       <p style={styletext}>Mission {text}</p>
       <p> Flight number : {props.data?.flight_number}</p>
       <p>{props.data?.details}</p>

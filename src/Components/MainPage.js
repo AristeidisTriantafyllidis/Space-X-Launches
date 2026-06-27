@@ -9,7 +9,7 @@ export default function MainPage(props) {
   });
   const [diplayLaunches, setDisplayLaunches] = React.useState([]);
   const [styleStatusFilter, setStyleStatusFilter] = React.useState("All");
-  const [styleSortFilter, setStyleSortFilter] = React.useState("No sort");
+  const [styleSortFilter, setStyleSortFilter] = React.useState("NoSort");
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -67,8 +67,8 @@ export default function MainPage(props) {
         }
         return true;
       }
+      return false;
     });
-
     setDisplayLaunches(filteredLaunch);
   };
 
@@ -92,7 +92,7 @@ export default function MainPage(props) {
     page = <h1>No launches found</h1>;
   } else {
     page = diplayLaunches.map((launch) => {
-      const [date, hour] = launch?.date_local?.replace("Z", "").split("T");
+      const date = launch?.date_local?.replace("Z", "").split("T");
       let text = "";
       let styletext = {};
       if (launch.upcoming) {
@@ -134,7 +134,7 @@ export default function MainPage(props) {
             />
             <p style={{ marginRight: "60px" }}>{launch.name}</p>
             <p style={{ marginRight: "60px" }}>
-              {date.split("-").reverse().join("-")}
+              {date[0].split("-").reverse().join("-")}
             </p>
             <p className="mission" style={styletext}>
               {" "}
@@ -242,7 +242,7 @@ export default function MainPage(props) {
             </Dropdown.Item>
             <Dropdown.Item
               style={
-                styleSortFilter === "null"
+                styleSortFilter === "NoSort"
                   ? { marginRight: "10px", color: "red" }
                   : { marginRight: "10px" }
               }
